@@ -18,6 +18,6 @@ public class User {
     @Column(name="full_name")
     private String fullname;
 
-    @Column(name="password")
+    @Column(name="pwd")
     private String password;
 }
