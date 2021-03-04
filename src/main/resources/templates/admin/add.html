@@ -15,19 +15,26 @@
         </div>
         <!-- /.card-header -->
         <!-- form start -->
+        <br>
+        <div th:if="${error != null}"
+             class="alert alert-danger" th:text="${error}"></div>
+
+        <div th:if="${success != null}"
+             class="alert alert-success" th:text="${success}"></div>
+
         <form th:object="${user}" th:action="@{/admin/user/do-add}" method="post">
             <div class="card-body">
                 <div class="form-group">
                     <label>Username</label>
-                    <input type="text" th:name="*{username}" class="form-control" placeholder="Username">
+                    <input type="text" th:field="*{username}" class="form-control" placeholder="Username">
                 </div>
                 <div class="form-group">
                     <label>Password</label>
-                    <input type="password" th:name="*{password}" class="form-control"  placeholder="Password">
+                    <input type="password" th:field="*{password}" class="form-control"  placeholder="Password">
                 </div>
                 <div class="form-group">
                     <label>Full Name</label>
-                    <input type="text" th:name="*{fullname}" class="form-control"  placeholder="Full Name">
+                    <input type="text" th:field="*{fullname}" class="form-control"  placeholder="Full Name">
                 </div>
             </div>
             <!-- /.card-body -->
