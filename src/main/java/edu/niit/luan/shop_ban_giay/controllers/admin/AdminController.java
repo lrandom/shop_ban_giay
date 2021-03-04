@@ -8,6 +8,6 @@ public class AdminController {
 
     @GetMapping("/admin")
     public String index(){
-        return "layouts/admin/list";
+        return "admin/list";
     }
 }
