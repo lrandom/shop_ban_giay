@@ -17,10 +17,19 @@
         <!-- form start -->
         <br>
         <div th:if="${error != null}"
-             class="alert alert-danger" th:text="${error}"></div>
+             class="notify alert alert-danger" th:text="${error}"></div>
 
         <div th:if="${success != null}"
-             class="alert alert-success" th:text="${success}"></div>
+             class="notify alert alert-success" th:text="${success}"></div>
+
+
+        <script type="application/javascript">
+            const alert = document.querySelector('.notify');
+            setTimeout(function(){
+                alert.style.display = 'none';
+            },2000);
+
+        </script>
 
         <form th:object="${user}" th:action="@{/admin/user/do-add}" method="post">
             <div class="card-body">

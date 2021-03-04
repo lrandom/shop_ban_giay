@@ -9,8 +9,11 @@ import org.springframework.stereotype.Service;
 public class UserService {
     @Autowired
     public IUserRepo userRepo;
+    @Autowired
+    UtilService utilService;
 
     public boolean add(User user) {
+        user.setPassword(utilService.getMd5(user.getPassword()));
         try {
             this.userRepo.save(user);
         } catch (Exception e) {
