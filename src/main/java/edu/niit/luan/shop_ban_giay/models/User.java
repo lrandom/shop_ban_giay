@@ -16,8 +16,10 @@ public class User {
     private String username;
 
     @Column(name="full_name")
-    private String fullname;
+    private String fullName;
 
     @Column(name="pwd")
     private String password;
+
+
 }

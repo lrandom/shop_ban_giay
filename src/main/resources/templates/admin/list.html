@@ -9,7 +9,49 @@
 </head>
 <body>
 <div class="container-fluid" layout:fragment="content">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">User List</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th style="width: 10px">#Id</th>
+                    <th>Username</th>
+                    <th>FullName</th>
+                    <th style="width: 40px">Thao tác</th>
+                </tr>
+                </thead>
+                <tbody>
 
+
+                <tr th:each="user:${items}">
+                    <td th:text="${user.getId()}"></td>
+                    <td th:text="${user.getUsername()}"></td>
+                    <td th:text="${user.getFullName()}"></td>
+                    <td>
+
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer clearfix">
+            <ul class="pagination pagination-sm m-0 float-right">
+                <li
+                        th:each="pageNumber:${#numbers.sequence(1, totalPage)}"
+                        th:attr="class=${activePage==pageNumber ? 'active page-item' : 'page-item'}"
+                        th:if="${pageNumber>0}">
+                    <a class="page-link" th:href="@{/admin/user(page=${pageNumber})}"
+                       th:text="${pageNumber}"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
 </body>
 </html>
