@@ -28,6 +28,16 @@ public class UserService {
         return true;
     }
 
+    public boolean save(User user)
+    {
+        try {
+            this.userRepo.save(user);
+        }catch (Exception e){
+            return false;
+        }
+        return true;
+    }
+
     public PagingResult getPaginate(int page){
         double totalPage = Math.ceil(userRepo.count()/2);//làm tròn lên
         Page<User> listItems = userRepo.findAll(PageRequest.of(page-1, 2));
@@ -46,5 +56,13 @@ public class UserService {
 
      public User getUserById(Long id){
         return userRepo.findById(id).get();
+     }
+     public boolean deleteById(Long id){
+        try {
+            userRepo.deleteById(id);
+        }catch (Exception e){
+            return false;
+        }
+        return true;
      }
 }

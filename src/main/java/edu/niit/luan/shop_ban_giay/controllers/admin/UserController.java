@@ -2,6 +2,7 @@ package edu.niit.luan.shop_ban_giay.controllers.admin;
 
 import edu.niit.luan.shop_ban_giay.models.User;
 import edu.niit.luan.shop_ban_giay.services.UserService;
+import edu.niit.luan.shop_ban_giay.services.UtilService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-public class UserController implements IAdminController{
+public class UserController implements IAdminController<User>{
     @Autowired
     public UserService userService;
+    @Autowired
+    public UtilService utilService;
 
     @GetMapping("/admin/user")
     @Override
@@ -46,14 +49,25 @@ public class UserController implements IAdminController{
 
     @Override
     @GetMapping("/admin/user/edit")
-    public String edit(@RequestParam int id, Model model) {
-        User user = userService.getUserById(new Long(id));
+    public String edit(@RequestParam Long id, Model model) {
+        User user = userService.getUserById(id);
         model.addAttribute("obj", user);
         return "admin/edit";
     }
 
     @Override
-    public String delete() {
+    @PostMapping("/admin/user/do-edit")
+    public String doEdit(User obj, @RequestParam String password) {
+        if(password!=null && !password.equalsIgnoreCase("")){
+            obj.setPassword(utilService.getMd5(password));
+        }
+        userService.save(obj);
+        return "redirect:/admin/user/edit?id="+obj.getId();
+    }
+
+    @Override
+    public String delete(Long id) {
+        userService.deleteById(id);
         return null;
     }
 }
