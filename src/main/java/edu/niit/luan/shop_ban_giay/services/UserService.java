@@ -43,4 +43,8 @@ public class UserService {
         double totalPage;
         List<User> listItems;
      }
+
+     public User getUserById(Long id){
+        return userRepo.findById(id).get();
+     }
 }

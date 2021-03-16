@@ -8,6 +8,6 @@ public interface IAdminController {
     public String list(Model mode, int page);
     public String  add(Model model);
     public String doAdd(User user, RedirectAttributes flashSession);
-    public String edit();
+    public String edit(int id, Model model);
     public String delete();
 }

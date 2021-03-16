@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/backend.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+</head>
+<body>
+<div class="container-fluid" layout:fragment="content">
+    <div class="card card-primary">
+        <div class="card-header">
+            <h3 class="card-title">Edit User</h3>
+        </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+        <br>
+        <div th:if="${error != null}"
+             class="notify alert alert-danger" th:text="${error}"></div>
+
+        <div th:if="${success != null}"
+             class="notify alert alert-success" th:text="${success}"></div>
+
+
+        <script type="application/javascript">
+            const alert = document.querySelector('.notify');
+            setTimeout(function(){
+                alert.style.display = 'none';
+            },2000);
+
+        </script>
+
+        <form th:object="${obj}" th:action="@{/admin/user/do-edit}" method="post">
+            <div class="card-body">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" th:field="*{username}" class="form-control" placeholder="Username">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" th:field="*{password}" class="form-control"  placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" th:field="*{fullName}" class="form-control"  placeholder="Full Name">
+                </div>
+            </div>
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

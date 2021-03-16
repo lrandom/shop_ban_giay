@@ -45,7 +45,10 @@ public class UserController implements IAdminController{
     }
 
     @Override
-    public String edit() {
+    @GetMapping("/admin/user/edit")
+    public String edit(@RequestParam int id, Model model) {
+        User user = userService.getUserById(new Long(id));
+        model.addAttribute("obj", user);
         return "admin/edit";
     }
 
